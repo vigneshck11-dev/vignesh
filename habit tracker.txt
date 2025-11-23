@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+int main() {
+    int exercise[7], study[7], sleep[7];
+    int totalExercise = 0, totalStudy = 0, totalSleep = 0;
+
+    printf("------ Habit Tracker (7 Days) ------\n");
+
+    // Input for each day
+    for (int i = 0; i < 7; i++) {
+        printf("\nDay %d:\n", i+1);
+
+        printf("Did you Exercise? (1 = Yes, 0 = No): ");
+        scanf("%d", &exercise[i]);
+
+        printf("Did you Study? (1 = Yes, 0 = No): ");
+        scanf("%d", &study[i]);
+
+        printf("Did you Sleep 7+ hours? (1 = Yes, 0 = No): ");
+        scanf("%d", &sleep[i]);
+
+        totalExercise += exercise[i];
+        totalStudy += study[i];
+        totalSleep += sleep[i];
+    }
+
+    // Weekly Report
+    printf("\n------ Weekly Habit Report ------\n");
+
+    printf("Exercise: %d/7 days (%.2f%%)\n",
+           totalExercise, (totalExercise * 100.0) / 7);
+
+    printf("Study: %d/7 days (%.2f%%)\n",
+           totalStudy, (totalStudy * 100.0) / 7);
+
+    printf("Sleep (7+ hours): %d/7 days (%.2f%%)\n",
+           totalSleep, (totalSleep * 100.0) / 7);
+
+    // Overall completion score
+    int totalCompleted = totalExercise + totalStudy + totalSleep;
+    float weeklyPercentage = (totalCompleted / 21.0) * 100; // 3 habits * 7 days = 21 tasks
+
+    printf("\nOverall Weekly Completion: %.2f%%\n", weeklyPercentage);
+
+    // Best & Worst Day Calculation
+    int bestDay = 0, worstDay = 0;
+    int bestScore = 0, worstScore = 3; // Max = 3 habits per day
+
+    for (int i = 0; i < 7; i++) {
+        int dailyScore = exercise[i] + study[i] + sleep[i];
+
+        if (dailyScore > bestScore) {
+            bestScore = dailyScore;
+            bestDay = i;
+        }
+
+        if (dailyScore < worstScore) {
+            worstScore = dailyScore;
+            worstDay = i;
+        }
+    }
+
+    printf("\nBest Day: Day %d (Completed %d/3 habits)\n", bestDay + 1, bestScore);
+    printf("Worst Day: Day %d (Completed %d/3 habits)\n", worstDay + 1, worstScore);
+
+    printf("\n------ End of Report ------\n");
+
+    return 0;
+}
