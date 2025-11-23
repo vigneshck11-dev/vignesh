@@ -24,9 +24,6 @@ Functions
 
 Structures (if used)
 
-File handling (optional)
-
-
 
 ---
 
